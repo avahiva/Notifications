@@ -3,318 +3,326 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>پروتکل ریموت</title>
+<title>پروتکل دورکاری</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:        #0D0F14;
-    --surface:   #13161E;
-    --card:      #1A1E2A;
-    --border:    #252A38;
-    --accent:    #5B7FFF;
-    --accent2:   #A78BFA;
-    --green:     #34D399;
-    --amber:     #FBBF24;
-    --text:      #F0F2FA;
-    --muted:     #7A809E;
-    --font:      'Vazirmatn', sans-serif;
+    --bg:         #F4F6FB;
+    --white:      #FFFFFF;
+    --navy:       #1B2A4A;
+    --navy2:      #1e3a6e;
+    --blue:       #2563EB;
+    --electric:   #0EA5E9;
+    --blue-light: #EFF6FF;
+    --blue-mid:   #DBEAFE;
+    --border:     #E2E8F0;
+    --muted:      #64748B;
+    --amber:      #F59E0B;
+    --font:       'Vazirmatn', sans-serif;
   }
 
   body {
     background: var(--bg);
-    color: var(--text);
+    color: var(--navy);
     font-family: var(--font);
     min-height: 100vh;
+    padding: 40px 16px 60px;
     display: flex;
-    align-items: flex-start;
     justify-content: center;
-    padding: 48px 16px;
   }
 
   .page {
     width: 100%;
-    max-width: 760px;
+    max-width: 780px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 
   /* ─── HEADER ─── */
   .header {
-    text-align: center;
-    padding: 48px 32px 40px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 20px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 55%, #1a4d7a 100%);
+    border-radius: 24px;
+    padding: 44px 40px;
+    color: white;
     position: relative;
     overflow: hidden;
+    text-align: center;
   }
   .header::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(91,127,255,.18) 0%, transparent 70%);
-    pointer-events: none;
+    top: -60px; left: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: rgba(14,165,233,.15);
   }
-  .badge {
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: -40px;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: rgba(37,99,235,.18);
+  }
+  .header-inner { position: relative; z-index: 1; }
+  .header-badge {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    background: rgba(91,127,255,.12);
-    border: 1px solid rgba(91,127,255,.3);
-    color: var(--accent);
+    background: rgba(255,255,255,.12);
+    border: 1px solid rgba(255,255,255,.2);
+    color: #BAE6FD;
     font-size: 11px;
-    font-weight: 500;
-    letter-spacing: .04em;
-    padding: 4px 14px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    padding: 5px 16px;
     border-radius: 100px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+    margin-bottom: 18px;
   }
   .header h1 {
-    font-size: clamp(26px, 5vw, 40px);
+    font-size: clamp(24px, 5vw, 36px);
     font-weight: 900;
-    line-height: 1.2;
-    background: linear-gradient(135deg, #fff 30%, var(--accent) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 12px;
+    line-height: 1.25;
+    margin-bottom: 10px;
   }
+  .header h1 span { color: #38BDF8; }
   .header p {
-    color: var(--muted);
     font-size: 14px;
     font-weight: 300;
+    color: rgba(255,255,255,.7);
     line-height: 1.8;
-    max-width: 480px;
+    max-width: 460px;
     margin: 0 auto;
   }
 
-  /* ─── TWO TYPES ─── */
-  .two-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  /* ─── GOAL CARD ─── */
+  .goal-card {
+    background: var(--blue-light);
+    border: 1px solid var(--blue-mid);
+    border-radius: 16px;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
     gap: 16px;
   }
-  .type-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px 20px;
+  .goal-icon {
+    width: 44px; height: 44px;
+    background: var(--blue);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .goal-card h3 { font-size: 13px; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+  .goal-card p  { font-size: 13px; font-weight: 400; color: var(--muted); line-height: 1.6; }
+
+  /* ─── TWO MODELS ─── */
+  .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .model-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 22px;
     position: relative;
     overflow: hidden;
   }
-  .type-card::after {
+  .model-card::before {
     content: '';
     position: absolute;
-    top: 0; right: 0;
-    width: 60px; height: 3px;
-    border-radius: 0 16px 0 0;
+    top: 0; right: 0; left: 0;
+    height: 4px;
+    border-radius: 18px 18px 0 0;
   }
-  .type-card.task::after { background: var(--green); }
-  .type-card.remote::after { background: var(--accent); }
+  .model-card.task::before   { background: linear-gradient(90deg, var(--navy), var(--blue)); }
+  .model-card.remote::before { background: linear-gradient(90deg, var(--blue), var(--electric)); }
 
-  .type-num {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-  .type-card.task .type-num { color: var(--green); }
-  .type-card.remote .type-num { color: var(--accent); }
+  .model-emoji { font-size: 28px; margin-bottom: 12px; display: block; }
+  .model-type  { font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+  .model-card.task   .model-type { color: var(--navy); }
+  .model-card.remote .model-type { color: var(--blue); }
+  .model-card h3 { font-size: 15px; font-weight: 800; margin-bottom: 10px; }
+  .model-dots { display: flex; flex-direction: column; gap: 7px; }
+  .model-dot  { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+  .model-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+  .model-card.task   .model-dot::before { background: var(--navy); }
+  .model-card.remote .model-dot::before { background: var(--blue); }
 
-  .type-card h3 {
-    font-size: 15px;
-    font-weight: 700;
-    margin-bottom: 8px;
-  }
-  .type-card p {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  /* ─── WAKEUP SECTION ─── */
-  .section-label {
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
-  }
+  /* ─── WAKEUP ─── */
   .wakeup-card {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: var(--white);
+    border: 1.5px solid var(--border);
     border-radius: 20px;
     padding: 32px 28px;
   }
-  .wakeup-card h2 {
-    font-size: 20px;
-    font-weight: 800;
+  .section-eyebrow {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 10px; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--blue);
     margin-bottom: 6px;
   }
-  .wakeup-card > p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.7;
-    margin-bottom: 28px;
-    font-weight: 300;
+  .section-eyebrow::before { content: ''; width: 18px; height: 2px; background: var(--blue); border-radius: 2px; }
+  .wakeup-card h2 { font-size: 19px; font-weight: 800; margin-bottom: 6px; }
+  .wakeup-card > p { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+
+  .time-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+
+  .time-row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+  }
+  .time-row.lunch {
+    background: #FFFBEB;
+    border-color: #FDE68A;
   }
 
-  .timeline {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    position: relative;
-  }
-  .timeline::before {
-    content: '';
-    position: absolute;
-    right: 28px;
-    top: 14px;
-    bottom: 14px;
-    width: 1px;
-    background: linear-gradient(to bottom, var(--accent), var(--accent2));
-    opacity: .25;
-  }
-
-  .tl-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 14px 0;
-    position: relative;
-  }
-  .tl-dot {
-    flex-shrink: 0;
-    width: 14px;
-    height: 14px;
+  .time-dot {
+    width: 10px; height: 10px;
     border-radius: 50%;
-    background: var(--accent);
-    margin-top: 3px;
-    position: relative;
-    z-index: 1;
-    box-shadow: 0 0 0 3px rgba(91,127,255,.2);
+    background: var(--blue);
+    flex-shrink: 0;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.15);
   }
-  .tl-item:nth-child(2) .tl-dot { background: #818CF8; box-shadow: 0 0 0 3px rgba(129,140,248,.2); }
-  .tl-item:nth-child(3) .tl-dot { background: var(--accent2); box-shadow: 0 0 0 3px rgba(167,139,250,.2); }
-  .tl-item:nth-child(4) .tl-dot { background: #C084FC; box-shadow: 0 0 0 3px rgba(192,132,252,.2); }
+  .time-row.lunch .time-dot {
+    background: var(--amber);
+    box-shadow: 0 0 0 3px rgba(245,158,11,.15);
+  }
 
-  .tl-time {
-    font-size: 22px;
-    font-weight: 900;
+  .time-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--navy);
     letter-spacing: -.01em;
-    line-height: 1;
-    color: var(--text);
-    min-width: 100px;
+    min-width: 130px;
+    direction: ltr;
+    text-align: right;
   }
-  .tl-time span {
-    display: block;
-    font-size: 11px;
-    font-weight: 400;
-    color: var(--muted);
-    margin-top: 3px;
-    letter-spacing: .02em;
-  }
-  .tl-label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--muted);
-    line-height: 1.5;
-    padding-top: 2px;
-  }
+  .time-row.lunch .time-value { color: var(--amber); }
+
+  .time-divider { width: 1px; height: 24px; background: var(--border); flex-shrink: 0; }
+  .time-label { font-size: 13px; color: var(--muted); font-weight: 400; }
+  .time-row.lunch .time-label { color: #92400E; }
 
   /* ─── RULES ─── */
   .rules-card {
-    background: var(--card);
-    border: 1px solid var(--border);
+    background: var(--white);
+    border: 1.5px solid var(--border);
     border-radius: 20px;
     padding: 32px 28px;
   }
-  .rules-card h2 {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 20px;
-  }
-  .rule-list {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
+  .rules-card h2 { font-size: 19px; font-weight: 800; margin-bottom: 20px; }
+
+  .rule-list { display: flex; flex-direction: column; gap: 12px; }
   .rule-item {
     display: flex;
     gap: 14px;
     align-items: flex-start;
+    padding: 14px 16px;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--border);
   }
-  .rule-icon {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
+  .rule-num {
+    width: 28px; height: 28px;
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    background: rgba(91,127,255,.08);
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
   }
-  .rule-text {
-    font-size: 13px;
-    line-height: 1.7;
-    color: var(--muted);
-    font-weight: 300;
-  }
-  .rule-text strong {
-    color: var(--text);
-    font-weight: 600;
-  }
+  .rule-text { font-size: 13px; line-height: 1.7; color: var(--muted); }
+  .rule-text strong { color: var(--navy); font-weight: 700; }
 
   /* ─── FORCE MAJEURE ─── */
   .alert-card {
-    background: rgba(251,191,36,.05);
-    border: 1px solid rgba(251,191,36,.2);
+    background: #FFF7ED;
+    border: 1.5px solid #FED7AA;
     border-radius: 16px;
-    padding: 22px 24px;
+    padding: 20px 22px;
     display: flex;
-    gap: 16px;
+    gap: 14px;
     align-items: flex-start;
   }
-  .alert-icon {
-    font-size: 22px;
+  .alert-icon-box {
+    width: 40px; height: 40px;
+    background: #FFEDD5;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
     flex-shrink: 0;
-    margin-top: 1px;
   }
-  .alert-content h4 {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--amber);
-    margin-bottom: 6px;
+  .alert-card h4 { font-size: 14px; font-weight: 700; color: #9A3412; margin-bottom: 4px; }
+  .alert-card p  { font-size: 13px; color: #C2410C; line-height: 1.6; }
+
+  /* ─── RESULTS ─── */
+  .results-card {
+    background: var(--white);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 28px;
   }
-  .alert-content p {
+  .results-card h2 { font-size: 19px; font-weight: 800; margin-bottom: 18px; }
+
+  .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .result-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--blue-light);
+    border: 1px solid var(--blue-mid);
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .result-check {
+    width: 26px; height: 26px;
+    background: var(--blue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: white;
     font-size: 13px;
-    color: var(--muted);
-    line-height: 1.7;
-    font-weight: 300;
+    flex-shrink: 0;
   }
+  .result-text { font-size: 13px; font-weight: 600; color: var(--navy); }
 
   /* ─── FOOTER ─── */
   .footer {
-    text-align: center;
-    padding: 12px;
-    color: var(--muted);
+    background: var(--navy);
+    border-radius: 16px;
+    padding: 20px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.12);
+    color: #BAE6FD;
     font-size: 11px;
-    font-weight: 300;
-    letter-spacing: .04em;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 100px;
   }
 
-  @media (max-width: 520px) {
-    .two-cols { grid-template-columns: 1fr; }
-    .tl-time { font-size: 18px; }
+  @media (max-width: 540px) {
+    .two-cols    { grid-template-columns: 1fr; }
+    .result-grid { grid-template-columns: 1fr; }
+    .time-value  { font-size: 15px; min-width: 100px; }
+    .header      { padding: 32px 20px; }
+    .wakeup-card, .rules-card, .results-card { padding: 24px 18px; }
   }
 </style>
 </head>
@@ -323,89 +331,140 @@
 
   <!-- HEADER -->
   <div class="header">
-    <div class="badge">⚡ آپدیت جدید تیم</div>
-    <h1>پروتکل ریموت ما</h1>
-    <p>یک سیستم ساده برای اینکه هم تمرکزمون حفظ بشه، هم همیشه روی رادار هم باشیم — بدون پیگیری‌های بی‌پایان.</p>
+    <div class="header-inner">
+      <div class="header-badge">🚀 آپدیت جدید تیم · Remote Protocol</div>
+      <h1>پروتکل جدید <span>دورکاری</span></h1>
+      <p>تمرکز بیشتر، پیگیری کمتر، نظم شفاف‌تر — برای تیمی که روی نوآوری حساب می‌کنه.</p>
+    </div>
   </div>
 
-  <!-- TWO TYPES -->
-  <div class="two-cols">
-    <div class="type-card task">
-      <div class="type-num">نوع اول</div>
-      <h3>کار پروژه‌ای</h3>
-      <p>یک تسک، یک ددلاین. ساعت کاری مهم نیست — فقط خروجی در موعد مقرر.</p>
+  <!-- GOAL -->
+  <div class="goal-card">
+    <div class="goal-icon">🎯</div>
+    <div>
+      <h3>هدف از این پروتکل</h3>
+      <p>تمرکز بیشتر، کاهش پیگیری‌های مداوم و شفاف شدن ساعت‌های کاری در روزهای Remote.</p>
     </div>
-    <div class="type-card remote">
-      <div class="type-num">نوع دوم</div>
-      <h3>کار ریموت</h3>
-      <p>از خونه‌ای، ولی مثل دفتر. در بازه ۸ تا ۱۶ در دسترسی و روی کاری.</p>
+  </div>
+
+  <!-- TWO MODELS -->
+  <div class="two-cols">
+    <div class="model-card task">
+      <span class="model-emoji">📋</span>
+      <div class="model-type">مدل اول</div>
+      <h3>کار پروژه‌ای</h3>
+      <div class="model-dots">
+        <div class="model-dot">تحویل تسک تا ددلاین</div>
+        <div class="model-dot">ساعت کار مهم نیست</div>
+        <div class="model-dot">فقط خروجی اهمیت داره</div>
+      </div>
+    </div>
+    <div class="model-card remote">
+      <span class="model-emoji">🏠</span>
+      <div class="model-type">مدل دوم</div>
+      <h3>دورکاری</h3>
+      <div class="model-dots">
+        <div class="model-dot">حضور در ساعات ۸ تا ۱۶</div>
+        <div class="model-dot">در دسترس و مشغول کار</div>
+        <div class="model-dot">مثل روزهای حضوری</div>
+      </div>
     </div>
   </div>
 
   <!-- WAKEUP TIMES -->
   <div class="wakeup-card">
-    <div class="section-label">⏱ سیستم Wake-up Time</div>
-    <h2>چهار پنجره طلایی روز</h2>
-    <p>لازم نیست مدام اسلک و تلگرام چک کنی. فقط در این ۴ بازه، پیام‌ها رو ببین و تأیید بده.</p>
+    <div class="section-eyebrow">زمان‌بندی روز</div>
+    <h2>⏰ پنجره‌های چک پیام</h2>
+    <p>فقط در این بازه‌ها پیام‌ها رو ببین و تأیید بده — بقیه وقت با تمرکز کامل کار کن.</p>
 
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">۹:۰۰<span>تا ۹:۳۰</span></div>
-        <div class="tl-label">شروع روز — اولین چک صبحگاهی</div>
+    <div class="time-grid">
+      <div class="time-row">
+        <div class="time-dot"></div>
+        <div class="time-value" dir="ltr">09:00 – 09:30</div>
+        <div class="time-divider"></div>
+        <div class="time-label">اولین چک صبحگاهی</div>
       </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">۱۱:۰۰<span>تا ۱۱:۳۰</span></div>
-        <div class="tl-label">وسط کار — چک دوم</div>
+      <div class="time-row">
+        <div class="time-dot"></div>
+        <div class="time-value" dir="ltr">11:00 – 11:30</div>
+        <div class="time-divider"></div>
+        <div class="time-label">چک دوم — وسط کار</div>
       </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">۱۳:۰۰<span>تا ۱۳:۳۰</span></div>
-        <div class="tl-label">بعد از ناهار — چک سوم</div>
+      <div class="time-row lunch">
+        <div class="time-dot"></div>
+        <div class="time-value" dir="ltr">12:00 – 13:00</div>
+        <div class="time-divider"></div>
+        <div class="time-label">🍽️ زمان ناهار و استراحت</div>
       </div>
-      <div class="tl-item">
-        <div class="tl-dot"></div>
-        <div class="tl-time">۱۵:۰۰<span>تا ۱۵:۳۰</span></div>
-        <div class="tl-label">اواخر روز — چک نهایی</div>
+      <div class="time-row">
+        <div class="time-dot"></div>
+        <div class="time-value" dir="ltr">13:00 – 13:30</div>
+        <div class="time-divider"></div>
+        <div class="time-label">چک سوم — بعد از ناهار</div>
+      </div>
+      <div class="time-row">
+        <div class="time-dot"></div>
+        <div class="time-value" dir="ltr">15:00 – 15:30</div>
+        <div class="time-divider"></div>
+        <div class="time-label">چک آخر — اواخر روز</div>
       </div>
     </div>
   </div>
 
   <!-- RULES -->
   <div class="rules-card">
-    <h2>قوانین بازی</h2>
+    <h2>✔️ قوانین بازی</h2>
     <div class="rule-list">
       <div class="rule-item">
-        <div class="rule-icon">🎯</div>
-        <div class="rule-text"><strong>تمرکز کامل بین پنجره‌ها.</strong> نیازی نیست هر دقیقه نگران پیام باشی. با خیال راحت وارد Deep Work بشو.</div>
+        <div class="rule-num">۱</div>
+        <div class="rule-text">در هر بازه پیام‌ها رو بررسی کن و با یه <strong>«اوکی»</strong>، <strong>«Seen»</strong> یا 👍 دریافت رو تأیید کن.</div>
       </div>
       <div class="rule-item">
-        <div class="rule-icon">✅</div>
-        <div class="rule-text"><strong>تأییدیه ساده کافیه.</strong> یه لایک، یه «اوکی» یا سین کردن. یعنی «دیدم، فهمیدم، رفت توی رادارم.»</div>
+        <div class="rule-num">۲</div>
+        <div class="rule-text"><strong>تأیید پیام ≠ انجام فوری.</strong> یعنی «دیدم، فهمیدم، رفت توی رادارم» — نه اینکه الان باید انجامش بدی.</div>
       </div>
       <div class="rule-item">
-        <div class="rule-icon">🔄</div>
-        <div class="rule-text"><strong>تأییدیه ≠ انجام فوری.</strong> تأیید کردن یعنی رویتِ تسک، نه اینکه الان باید انجامش بدی.</div>
+        <div class="rule-num">۳</div>
+        <div class="rule-text">بین پنجره‌ها با <strong>تمرکز کامل</strong> کار کن. نیازی نیست هر دقیقه نگران پیام باشی.</div>
       </div>
       <div class="rule-item">
-        <div class="rule-icon">🧘</div>
-        <div class="rule-text"><strong>آرامش طرفین تضمین میشه.</strong> می‌دونیم پیام حداکثر تا پنجره بعدی تأیید میشه — نه پیگیری، نه استرس.</div>
+        <div class="rule-num">۴</div>
+        <div class="rule-text">عدم ثبت تأییدهای زمان‌بندی‌شده به‌صورت مداوم، امکان <strong>محاسبه آن روز به‌عنوان دورکاری</strong> رو از بین می‌بره.</div>
       </div>
     </div>
   </div>
 
   <!-- FORCE MAJEURE -->
   <div class="alert-card">
-    <div class="alert-icon">🚨</div>
-    <div class="alert-content">
-      <h4>فورس‌ماژور (Interrupt)</h4>
-      <p>اگه چیزی واقعاً اضطراری بود، مستقیم زنگ بزن. تماس تلفنی = اینتراپت سخت‌افزاری. در غیر این صورت، همه چیز از مسیر پنجره‌های Wake-up پیش میره.</p>
+    <div class="alert-icon-box">☎️</div>
+    <div>
+      <h4>موارد فوری و اضطراری</h4>
+      <p>اگه موضوع حیاتی بود، مستقیم <strong>تماس تلفنی</strong> بگیر. تماس = اینتراپت فوری. در غیر این صورت همه چیز از مسیر پنجره‌های بالا پیش میره.</p>
     </div>
   </div>
 
-  <div class="footer">ساخته‌شده برای تیم IoT ما · نظر و پیشنهاد؟ همین‌جا بگو 🚀</div>
-
+  <!-- RESULTS -->
+  <div class="results-card">
+    <h2>🚀 نتیجه این پروتکل</h2>
+    <div class="result-grid">
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">تمرکز بیشتر (Deep Work)</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">کاهش پیگیری‌های غیرضروری</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">نظم و هماهنگی بهتر تیم</div>
+      </div>
+      <div class="result-item">
+        <div class="result-check">✓</div>
+        <div class="result-text">شفافیت در ثبت ساعت دورکاری</div>
+      </div>
+    </div>
+  </div>
 </div>
 </body>
 </html>
